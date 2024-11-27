@@ -15,7 +15,7 @@ source config.sh
 echo "Starting instances and downloading agent from $PUBDNS; Project is $PROJECT_ID and agent key is $AGENT_API_KEY"
 
 # start 3 hosts and install the agent
-aws ec2 run-instances --image-id $IMAGE --count $NUM_HOSTS --instance-type t2.small --key-name $KEYNAME \
+aws ec2 run-instances --image-id $IMAGE --count $NUM_HOSTS --instance-type t3.medium  --key-name $KEYNAME \
   --security-group-ids $SECGROUP --block-device-mappings '[{"DeviceName": "/dev/xvda", "Ebs": {"DeleteOnTermination": true, "VolumeSize": 100, "VolumeType": "gp3"}}]' \
   --tag-specification "ResourceType=instance,Tags=[{Key=Name, Value=\"$NAMETAG-instances\"},{Key=owner, Value=\"$OWNERTAG\"}, {Key=expire-on,Value=\"$EXPIREON\"}, {Key=purpose,Value=\"$PURPOSETAG\"}]" > /dev/null
 
